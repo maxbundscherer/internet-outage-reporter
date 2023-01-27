@@ -28,15 +28,17 @@ Author: [Maximilian Bundscherer](https://bundscherer-online.de)
 
 1. Add IFTTT API Key in `ior.sh`
     - `vim ior.sh`
-    - Add `IFTTT Event Name`
     - Add `IFTTT API Key`
+    - (opt.) Change `My Location`
+    - (opt.) Change `IFTTT Event Name`
 
 2. Test Notification
     - `./ior.sh -test`
 
 3. Add Cronjob
     - `sudo crontab -e`
-    - `*/5 * * * * /<PATH_TO_REPO>/ior.sh -check` (every 5 minutes)
+    - `*/5 * * * * /<PATH_TO_REPO>/ior.sh -check` (every 5 minutes) (add for checking status every 5 minutes)
+    - `*/15 * * * * /<PATH_TO_REPO>/ior.sh -test` (every 15 minutes) (add for sending test notification every 15 minutes) (not recommend)
 
 ## Debug
 

@@ -4,8 +4,11 @@
 #################### CONFIG SECTION ################################
 ####################################################################
 
-config_ifttt_event_name="ior"                                  # Enter your IFTTT event name here (default is ior)
 config_ifttt_key="" # Enter your IFTTT key here
+
+config_my_location="Home" # Enter your location here (please only use a single word)
+
+config_ifttt_event_name="ior" # Enter your IFTTT event name here (default is ior)
 
 ####################################################################
 #################### SCRIPT SECTION ################################
@@ -17,7 +20,7 @@ if [ "$1" = "-test" ]; then
 
     # Send test notifcation
 
-    send_data="Test-Notification<BR>$CURRENT_TIME"
+    send_data="Test-Notification<BR>$config_my_location<BR><BR>$CURRENT_TIME"
 
     r=$(
         curl \
@@ -54,7 +57,7 @@ elif [ "$1" = "-check" ]; then
             f_downtime=$(cat first-downtime.txt)
             echo "Internet connection was down in the past '$f_downtime'"
 
-            send_data="Internet-Down-Notification<BR>$f_downtime<BR>$CURRENT_TIME"
+            send_data="Internet-Down-Notification<BR>$config_my_location<BR><BR>$f_downtime<BR>$CURRENT_TIME"
 
             r=$(
                 curl \
