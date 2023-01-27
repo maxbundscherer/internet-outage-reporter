@@ -15,7 +15,7 @@ if [ "$1" = "-test" ]; then
 
     # Send test notifcation
 
-    send_data="TestNotification<BR>$CURRENT_TIME"
+    send_data="Test-Notification<BR>$CURRENT_TIME"
 
     r=$(
         curl \
@@ -43,8 +43,34 @@ elif [ "$1" = "-check" ]; then
     if nc -zw1 google.com 443; then
 
         # "Internet connection"
-        echo "Nice"
+        echo "Internet connection is up"
 
+        if [ -f first-downtime.txt ]; then
+
+            # Internet was down in the past
+
+            f_downtime=$(cat first-downtime.txt)
+            echo "Internet connection was down in the past '$f_downtime'"
+
+            send_data="Internet-Down-Notification<BR>$f_downtime<BR>$CURRENT_TIME"
+
+            r=$(
+                curl \
+                -X POST \
+                -H "Content-Type: application/json" \
+                -d '{"value1":"'$send_data'"}' \
+                "https://maker.ifttt.com/trigger/$config_ifttt_event_name/with/key/$config_ifttt_key"
+            )
+
+            if [[ "$r" == *"Congratulationss"* ]]; then
+                echo "Success send down notification"
+                rm first-downtime.txt
+            else
+                echo "Failure send down notification"
+            fi
+
+        fi
+        
     else
 
         # "No internet connection"
