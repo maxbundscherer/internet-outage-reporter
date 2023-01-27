@@ -31,4 +31,4 @@ Author: [Maximilian Bundscherer](https://bundscherer-online.de)
 
 3. Add Cronjob
     - `crontab -e`
-    - `*/5 * * * * /<PATH_TO_REPO>/ior.sh -check` (evey 5 minutes)
+    - `*/30 * * * * /<PATH_TO_REPO>/ior.sh -check` (every 30 minutes)
