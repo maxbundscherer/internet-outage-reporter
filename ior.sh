@@ -62,7 +62,7 @@ elif [ "$1" = "-check" ]; then
                 "https://maker.ifttt.com/trigger/$config_ifttt_event_name/with/key/$config_ifttt_key"
             )
 
-            if [[ "$r" == *"Congratulationss"* ]]; then
+            if [[ "$r" == *"Congratulations"* ]]; then
                 echo "Success send down notification"
                 rm first-downtime.txt
             else
