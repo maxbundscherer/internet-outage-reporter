@@ -37,3 +37,8 @@ Author: [Maximilian Bundscherer](https://bundscherer-online.de)
 3. Add Cronjob
     - `crontab -e`
     - `*/30 * * * * /<PATH_TO_REPO>/ior.sh -check` (every 30 minutes)
+
+## Debug
+
+- In `last-check.txt`, the time of the last check is stored. Useful for cron job testing.
+- `first-down.txt` stores the first time the internet went down. This file is deleted if the notifications have been sent.
