@@ -9,13 +9,13 @@ config_ifttt_key="" # Enter your IFTTT key here
 #################### SCRIPT SECTION ################################
 ####################################################################
 
-CURRENT_DATE=$(date +"%Y-%m-%d-at-%H:%M:%S")
+CURRENT_TIME=$(date +"%Y-%m-%d-at-%H:%M:%S")
 
 if [ "$1" = "-test" ]; then
 
     # Send test notifcation
 
-    send_data="TestNotification<BR>$CURRENT_DATE"
+    send_data="TestNotification<BR>$CURRENT_TIME"
 
     r=$(
         curl \
@@ -25,12 +25,12 @@ if [ "$1" = "-test" ]; then
         "https://maker.ifttt.com/trigger/$config_ifttt_event_name/with/key/$config_ifttt_key"
     )
 
-    echo
+    echo ""
 
     if [[ "$r" == *"Congratulations"* ]]; then
-        echo "Success"
+        echo "Success send test notification"
     else
-        echo "Failure"
+        echo "Failure send test notification"
         echo $r
     fi
 
@@ -38,7 +38,31 @@ elif [ "$1" = "-check" ]; then
 
     # Test internet connection
 
-    echo "tbd"
+    echo "$CURRENT_TIME" > last-check.txt
+
+    if nc -zw1 google.com 443; then
+
+        # "Internet connection"
+        echo "Nice"
+
+    else
+
+        # "No internet connection"
+
+        if [ -f first-downtime.txt ]; then
+
+            # Was down until now
+            echo "Internet connection is down (was down until now)"
+
+        else
+
+            # Down for the first time
+            echo "Internet connection is down (down for the first time)"
+            echo "$CURRENT_TIME" > first-downtime.txt
+
+        fi
+
+    fi
 
 else
     echo "Please specify a valid argument: -test or -check"
