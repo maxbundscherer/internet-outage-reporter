@@ -3,17 +3,19 @@
 ####################################################################
 
 config_ifttt_event_name="ior"                                  # Enter your IFTTT event name here (default is ior)
-config_ifttt_key=""                                            # Enter your IFTTT key here
+config_ifttt_key="" # Enter your IFTTT key here
 
 ####################################################################
 #################### SCRIPT SECTION ################################
 ####################################################################
 
+CURRENT_DATE=$(date +"%Y-%m-%d-at-%H:%M:%S")
+
 if [ "$1" = "-test" ]; then
 
     # Send test notifcation
 
-    send_data="TestData"
+    send_data="TestNotification<BR>$CURRENT_DATE"
 
     r=$(
         curl \
