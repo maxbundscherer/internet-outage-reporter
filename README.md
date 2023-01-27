@@ -13,8 +13,11 @@ Author: [Maximilian Bundscherer](https://bundscherer-online.de)
 ### Config IFTTT
 
 1. Create IFTTT Applet
+    - Name: `ior`
     - If: `Receive a web request`
     - Then: `Send me an email`
+        - Subject: `IOR Report`
+        - Body: `{{Value1}}`
 
 2. Get IFTTT API Key
     - Go to [IFTTT](https://ifttt.com/maker_webhooks)
@@ -25,6 +28,8 @@ Author: [Maximilian Bundscherer](https://bundscherer-online.de)
 
 1. Add IFTTT API Key in `ior.sh`
     - `vim ior.sh`
+    - Add `Event Name`
+    - Add `IFTTT API Key`
 
 2. Test Notification
     - `./ior.sh -test`
