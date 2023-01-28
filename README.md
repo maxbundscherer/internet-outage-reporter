@@ -29,6 +29,7 @@ Author: [Maximilian Bundscherer](https://bundscherer-online.de)
 1. Add IFTTT API Key in `ior.sh`
     - `vim ior.sh`
     - Add `IFTTT API Key`
+    - Add `Local Path`
     - (opt.) Change `My Location`
     - (opt.) Change `IFTTT Event Name`
 
